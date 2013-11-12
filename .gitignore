@@ -1,3 +1,10 @@
+*.mk
+*.bash
+*.xml
+*.pro
+.gitignore
+MakeFile
+
 # Compiled Object files
 *.slo
 *.lo
