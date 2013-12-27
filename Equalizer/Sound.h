@@ -5,6 +5,9 @@
 #include "QTimer"
 #include "riff.h"
 #include "QObject"
+#include "Point.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 class Sound : public QObject{
     Q_OBJECT;
@@ -12,22 +15,21 @@ public:
     Sound(QString filepath);
     void setFile(QString filepath);
     int getLength(){return (in->buf_size()/in->samplespersec());}; //время воспроизведения в секундах
+    QList<Point>* getPoints();
+    void setStart(int);
+    void readData();
     virtual ~Sound();
     
 public slots:
-    void play();
-    void pause();
-    void timeUP();
-    
-signals:
-    void secUP();
+    void reflash();
     
     
 private:
-    QSound *sng;
-    QTimer *timer;
+
     riffwave_reader *in;
+    int start;
+    int* data;
 };
 
-#endif	
+#endif	/* SOUND_H */
 
