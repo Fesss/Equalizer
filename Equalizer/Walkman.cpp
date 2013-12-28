@@ -6,7 +6,7 @@ Walkman::Walkman() {
     QWidget *box = new QWidget();
     QVBoxLayout *layout = new QVBoxLayout();
     draw = new MainWindow();
-    
+        
     play = new QPushButton("Play");
     play->setMaximumSize(40,20);
     pause = new QPushButton("Stop");
