@@ -1,3 +1,5 @@
+
+
 #include <string>
 #include "Sound.h"
 
@@ -15,14 +17,15 @@ void Sound::setFile(QString filepath) {
 }
 
 void Sound::setStart(int st){
-    start=st*1000;
+    start=(st/10)*(in->samplespersec()/2)+(st-(st/10)*10+1)*(in->samplespersec()/10);
 }
 
 QList<Point>* Sound::getPoints() {
     QList<Point>* part = new QList<Point > ();
     int j = 0;
-    if ((start + 1000) < (in->data_size()/44) ) {
-        for (int i = start; i < (start + 1000); i++) {
+    int sps = in->samplespersec()/5;
+    if ((start + sps) < (in->data_size()/2) ) {
+        for (int i = start; i < (start + sps); i++) {
             part->append(Point(j, data[i]));
             j++;
         }
@@ -31,21 +34,16 @@ QList<Point>* Sound::getPoints() {
 }
 
 void Sound::readData() {
-    int len = in->data_size()/44+1;
+    int len = in->data_size()/2;
     data = static_cast<int*> (malloc(len* sizeof (int)));
-    QList<int>* sorts = new QList<int>();
-    int i=0;
+    int i=0,second=0;
     for (int j = 0; j < in->data_size() ; j++) {
-        if ((j % 44 == 0) && (j != 0)) {
-            sorts->append((*in)(j, riffwave_reader::LEFT));
-            qSort(sorts->begin(), sorts->end());
-            data[i] = ( (sorts->at(22) + sorts->at(23))/2 );
+        if ((j % 2 == 0) && (j != 0)) {
+            data[i] = ( (second + (*in)(j, riffwave_reader::LEFT))/2 );
             i++;
-            sorts->clear();
         } else
-            sorts->append((*in)(j, riffwave_reader::LEFT));
+            second=(*in)(j, riffwave_reader::LEFT);
     }
-    delete sorts;
 }
 
 void Sound::reflash() {

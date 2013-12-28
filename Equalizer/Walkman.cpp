@@ -1,3 +1,4 @@
+
 #include "Walkman.h"
 
 
@@ -14,7 +15,7 @@ Walkman::Walkman() {
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
     mediaObject = new Phonon::MediaObject(this);
 
-    mediaObject->setTickInterval(1000);
+    mediaObject->setTickInterval(200);
      
     seekSlider = new Phonon::SeekSlider();
     seekSlider->setMediaObject(mediaObject);
@@ -63,7 +64,7 @@ Walkman::Walkman() {
 void Walkman::up(qint64 time){
     QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
     timeLcd->display(displayTime.toString("mm:ss"));
-    snd->setStart(time/1000);
+    snd->setStart(time/100);
     draw->repaint();
 }
 
