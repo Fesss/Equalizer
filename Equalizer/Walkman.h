@@ -1,4 +1,5 @@
 
+
 #ifndef WALKMAN_H
 #define	WALKMAN_H
 #include "QObject"
