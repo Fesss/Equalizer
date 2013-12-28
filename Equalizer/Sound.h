@@ -8,6 +8,8 @@
 #include "Point.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <fft.h>
+#include <cmath>
 
 class Sound : public QObject{
     Q_OBJECT;
