@@ -24,7 +24,9 @@ public:
     void setModel(Sound *snd);
 private:
     QGraphicsScene *scene;
+    QPen pen;
     Sound *snd;
+    QPoint resolution;
 
 public slots:
     void repaint();

@@ -6,6 +6,7 @@ Walkman::Walkman() {
     QWidget *box = new QWidget();
     QVBoxLayout *layout = new QVBoxLayout();
     draw = new MainWindow();
+    setAnimated(false);
         
     play = new QPushButton("Play");
     play->setMaximumSize(40,20);
@@ -15,7 +16,7 @@ Walkman::Walkman() {
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
     mediaObject = new Phonon::MediaObject(this);
 
-    mediaObject->setTickInterval(200);
+    mediaObject->setTickInterval(40);
      
     seekSlider = new Phonon::SeekSlider();
     seekSlider->setMediaObject(mediaObject);
